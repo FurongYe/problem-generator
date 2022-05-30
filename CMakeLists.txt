@@ -16,8 +16,6 @@ if(WIN32 OR MSYS OR CYGWIN OR MINGW)
 set(PROBLEM_GENERATOR_SO "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_DIR}/libproblem_generator.dll")
 endif()
 
-
-
 if(UNIX)
     if(APPLE)
         set(PROBLEM_GENERATOR_SO "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_DIR}/libproblem_generator.dylib")
@@ -36,6 +34,6 @@ set_target_properties(problem_generator PROPERTIES LOCATION ${CMAKE_CURRENT_BINA
 
 add_library(problem_generator_lib SHARED IMPORTED GLOBAL)
 set_property(TARGET problem_generator_lib PROPERTY IMPORTED_LOCATION ${PROBLEM_GENERATOR_SO})
-#add_test(NAME problem_generator_test
-#    COMMAND cargo test
-#    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+if(MVSC)
+    set_property(TARGET problem_generator_lib PROPERTY IMPORTED_IMPLIB "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_DIR}/libproblem_generator.lib")
+endif()
