@@ -17,9 +17,10 @@ set(PROBLEM_GENERATOR_SO "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_DIR}/libproblem_g
 endif()
 
 if(UNIX)
-    if(APPLE)
+    if (CMAKE_SYSTEM_NAME MATCHES "Darwin" )
         set(PROBLEM_GENERATOR_SO "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_DIR}/libproblem_generator.dylib")
-    else()
+    endif()
+    if (CMAKE_SYSTEM_NAME MATCHES "Linux" )
         set(PROBLEM_GENERATOR_SO "${CMAKE_CURRENT_BINARY_DIR}/${TARGET_DIR}/libproblem_generator.so")
     endif()
 endif()
